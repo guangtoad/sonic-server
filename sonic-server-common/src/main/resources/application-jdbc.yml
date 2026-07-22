@@ -2,11 +2,18 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #  jdbc:mysql://{mysql host}:{mysql port}/{database}
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:sonic}?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&serverTimezone=GMT%2b8
+    #url: jdbc:mysql://${MYSQL_HOST:192.168.1.201}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:sonic}?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&serverTimezone=GMT%2b8
+#    url: jdbc:mysql://192.168.1.201:3306/sonic?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&serverTimezone=GMT%2b8
+    url: jdbc:mysql://192.168.1.201:3306/sonic?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&autoReconnect=true&connectTimeout=5000&socketTimeout=10000&useSSL=false
     # mysql username
-    username: ${MYSQL_USERNAME:root}
+    username: toad
     # mysql password
-    password: ${MYSQL_PASSWORD:Sonic!@#123}
+    password: 12345678
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 300000
+      max-lifetime: 1800000
     schema:
       - classpath:data.sql
   sql:
