@@ -11,4 +11,5 @@ public interface PlatformType {
     int WINDOWS = 3;
     int MAC = 4;
     int WEB = 5;
+    int HARMONYOS = 6;
 }

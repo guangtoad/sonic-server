@@ -13,12 +13,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Bean utilities.
+ * Bean工具类 - 提供对象属性复制、类型转换等Bean操作工具方法
  *
  * @author JayWenStar
  */
 public class BeanTool {
 
+    /**
+     * 私有构造函数，防止实例化工具类
+     */
     private BeanTool() {
     }
 
@@ -131,6 +134,16 @@ public class BeanTool {
         return emptyNames;
     }
 
+    /**
+     * 将源对象转换为指定类型的Bean对象
+     *
+     * @param source 源对象，不能为空
+     * @param clazz 目标类型，不能为空
+     * @param <T> 目标类型泛型
+     * @return 转换后的Bean对象
+     * @throws IllegalArgumentException 如果source或clazz为null
+     * @throws StackOverflowError 注意：此方法存在递归调用自身的问题，会导致栈溢出
+     */
     @NonNull
     public static <T> T toBean(Object source, Class<T> clazz) {
         Assert.notNull(source, "object must not be null");

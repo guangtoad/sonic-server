@@ -8,12 +8,15 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
- * Reflection utilities.
+ * 反射工具类 - 提供泛型类型获取、参数化类型解析等反射操作工具方法
  *
  * @author JayWenStar
  */
 public class ReflectionTool {
 
+    /**
+     * 私有构造函数，防止实例化工具类
+     */
     private ReflectionTool() {
     }
 

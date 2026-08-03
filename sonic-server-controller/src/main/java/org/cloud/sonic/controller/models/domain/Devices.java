@@ -84,7 +84,7 @@ public class Devices implements Serializable, TypeConverter<Devices, DevicesDTO>
     private String password;
 
     @TableField
-    @Column(isNull = false, comment = "系统类型 1：android 2：ios")
+    @Column(isNull = false, comment = "系统类型 1：android 2：ios 6:Har")
     private Integer platform;
 
     @TableField

@@ -280,6 +280,9 @@ public class TestSuitesServiceImpl extends SonicServiceImpl<TestSuitesMapper, Te
             if (steps.getPlatform() == PlatformType.IOS) {
                 plat = "iOS";
             }
+            if (steps.getPlatform() == PlatformType.HARMONYOS) {
+                plat = "HarmonyOS";
+            }
             steps.setText(packagesService.findOne(steps.getProjectId(), steps.getText(), plat));
         }
 
@@ -341,6 +344,9 @@ public class TestSuitesServiceImpl extends SonicServiceImpl<TestSuitesMapper, Te
             }
             if (steps.getPlatform() == PlatformType.IOS) {
                 plat = "iOS";
+            }
+            if (steps.getPlatform() == PlatformType.HARMONYOS) {
+                plat = "HarmonyOS";
             }
             stepsJsonObj.put("text", packagesService.findOne(steps.getProjectId(), steps.getText(), plat));
         }

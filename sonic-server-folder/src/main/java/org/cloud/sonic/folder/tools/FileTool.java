@@ -34,14 +34,19 @@ import java.util.Calendar;
 import java.util.UUID;
 
 /**
+ * 文件工具类 - 提供文件上传、删除、分片合并等文件操作工具方法
+ * 主要用于处理测试录像文件的上传和分片合并
+ *
  * @author ZhouYiXun
- * @des 合并录像工具类
  * @date 2021/8/18 20:36
  */
 @Component
 @RefreshScope
 public class FileTool {
+    /** 日志记录器 */
     private final Logger logger = LoggerFactory.getLogger(FileTool.class);
+
+    /** 网关主机地址，通过配置项 gateway.host 配置 */
     @Value("${gateway.host}")
     private String host;
 
@@ -74,23 +79,40 @@ public class FileTool {
         return host + "/api/folder/" + local.getPath().replaceAll("\\\\", "/");
     }
 
+    /**
+     * 文件上传方法 V2 - 上传文件到指定文件夹，返回本地文件路径
+     * 与upload方法的区别：返回本地路径而非URL路径
+     *
+     * @param folderName 目标文件夹名称
+     * @param file 上传的文件
+     * @return 上传后的本地文件路径
+     * @throws IOException 文件操作异常
+     */
     public String uploadV2(String folderName, MultipartFile file) throws IOException {
+        // 使用日期格式创建子文件夹（yyyyMMdd）
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
         File folder = new File(folderName + File.separator
                 + sf.format(Calendar.getInstance().getTimeInMillis()));
+
+        // 如果文件夹不存在则创建
         if (!folder.exists()) {
             folder.mkdirs();
         }
-        //防止文件重名
+
+        // 防止文件重名：使用UUID作为文件名，保留原文件扩展名
         final String nombre = file.getOriginalFilename();
         final int p = nombre.lastIndexOf(".");
         File local = new File(folder.getPath() + File.separator +
-                UUID.randomUUID() + (p>=0 ? nombre.substring(p) : nombre));
+                UUID.randomUUID() + (p >= 0 ? nombre.substring(p) : nombre));
+
         try {
+            // 将上传文件转移到本地文件
             file.transferTo(local.getAbsoluteFile());
         } catch (FileAlreadyExistsException e) {
             logger.error(e.getMessage());
         }
+
+        // 返回本地路径（统一使用正斜杠）
         return local.getPath().replaceAll("\\\\", "/");
     }
 

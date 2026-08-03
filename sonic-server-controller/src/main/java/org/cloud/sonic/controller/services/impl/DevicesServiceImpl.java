@@ -107,6 +107,14 @@ public class DevicesServiceImpl extends SonicServiceImpl<DevicesMapper, Devices>
                                 result.put("wdaMjpeg", String.format("http://%s:%d", agents.getHost(), occupyParams.getWdaMjpegRemotePort()));
                             }
                         }
+                        case PlatformType.HARMONYOS -> {
+                            if (occupyParams.getSasRemotePort() != 0) {
+                                result.put("sas", String.format("adb connect %s:%d", agents.getHost(), occupyParams.getSasRemotePort()));
+                            }
+                            if (occupyParams.getUia2RemotePort() != 0) {
+                                result.put("uia2", String.format("http://%s:%d/uia/%d", agents.getHost(), agents.getPort(), occupyParams.getUia2RemotePort()));
+                            }
+                        }
                     }
                     return new RespModel<>(RespEnum.HANDLE_OK, result);
                 } else {
@@ -205,7 +213,7 @@ public class DevicesServiceImpl extends SonicServiceImpl<DevicesMapper, Devices>
                     });
                 }
                 if (hmVersion != null) {
-                    i.or().eq(Devices::getPlatform, PlatformType.ANDROID).eq(Devices::getIsHm, 1)
+                    i.or().eq(Devices::getPlatform, PlatformType.HARMONYOS).eq(Devices::getIsHm, 1)
                             .and(j -> {
                                 for (String v : hmVersion) {
                                     j.or().likeRight(Devices::getVersion, v);

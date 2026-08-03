@@ -4,10 +4,11 @@ spring:
     #  jdbc:mysql://{mysql host}:{mysql port}/{database}
     #url: jdbc:mysql://${MYSQL_HOST:192.168.1.201}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:sonic}?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&serverTimezone=GMT%2b8
 #    url: jdbc:mysql://192.168.1.201:3306/sonic?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&serverTimezone=GMT%2b8
-    url: jdbc:mysql://192.168.1.201:3306/sonic?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&autoReconnect=true&connectTimeout=5000&socketTimeout=10000&useSSL=false
+    url: jdbc:mysql://192.168.1.201:3306/sonic_dev?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&autoReconnect=true&connectTimeout=30000&socketTimeout=60000&useSSL=false&allowPublicKeyRetrieval=true
     # mysql username
     username: toad
     # mysql password
+
     password: 12345678
     hikari:
       minimum-idle: 5
