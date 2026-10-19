@@ -1,15 +1,35 @@
-*/*.iml
+# =======================
+# 1. IDE & System Files (IDE与系统文件)
+# =======================
+# IntelliJ IDEA
+.idea/
 *.iml
-*/.DS_Store
+
+# macOS
 .DS_Store
-/.idea/
-*/.idea/
-/logs/
-/log/
-/record/
-*/target
-/imageFiles/
-/keepFiles/
-/recordFiles/
-/packageFiles/
-/sonic-server-controller/logs/
+
+# =======================
+# 2. Build, Logs & Records (构建、日志与记录)
+# =======================
+# Build Outputs
+target/
+
+# Logs
+logs/
+log/
+sonic-server-controller/logs/
+*.log
+
+# Records
+record/
+recordFiles/
+
+# =======================
+# 3. Project Specific Folders (项目特定目录)
+# =======================
+imageFiles/
+keepFiles/
+packageFiles/
+
+# GitHub Actions (如果不想提交工作流配置则保留，否则建议删除)
+# .github/
